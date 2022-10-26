@@ -5,7 +5,8 @@
   tasks:
  - name: Installation MariaDB
     dnf: 
-     name:
+     name: {{ item }}
+   loop:
        - mariadb
        - python3-PyMySQL  
      state: present
