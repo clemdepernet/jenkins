@@ -1,10 +1,4 @@
 ---
-- hosts: web
-  
-  vars:
-   root_password: 'root'
-
-  tasks:
   - name: installation Mariadb
     dnf:
      name: "{{ item }}"
@@ -18,3 +12,13 @@
      name: mariadb
      state: started
      enabled: yes
+  - name: ajout .my.cnf conf mariadb
+    copy:
+     src: .my.cnf
+     dest: /root/.my.cnf
+  - name: Ajout du user mariadb 'clem' avec  password 'root'  et tout privileges
+    mysql_user:
+     name: clem
+     password: root
+     priv: '*.*:ALL'
+     state: present
