@@ -1,20 +1,21 @@
 ---
+
 - hosts: web
   
+  vars:
+   root_password: 'root'
+
   tasks:
-  - name: Installation MariaDB
-    dnf: 
-     name: {{ item }}
+  - name: installation Mariadb
+    dnf:
+     name: "{{ item }}"
      state: present
     loop:
      - mariadb
      - python3-PyMySQL
      - mariadb-server
-  - name : Lancement de MariaDB
+  - name:  Activation Mariadb
     systemd:
-     name: {{ item }}
+     name: mariadb
      state: started
      enabled: yes
-    loop:
-     - mariadb
-     - mariadb-server
