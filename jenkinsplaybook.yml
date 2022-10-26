@@ -3,17 +3,17 @@
   vars:
    MYSQL_ROOT_PASSWORD: 'root'
   tasks:
-   - name: Installation MariaDB
-     dnf: 
-      name:
-        - mariadb
-        - python3-PyMySQL  
-      state: present
-   - name: Activation Maria DB
-     systemd:
-      name: mariadb
-      state: started
-      enabled: yes
+ - name: Installation MariaDB
+    dnf: 
+     name:
+       - mariadb
+       - python3-PyMySQL  
+     state: present
+ - name: Activation Maria DB
+    systemd:
+     name: mariadb
+     state: started
+     enabled: yes
 
 
 
