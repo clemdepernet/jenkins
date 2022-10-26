@@ -1,0 +1,7 @@
+---
+# vars file for php
+packet_php:
+ - php
+ - php-fpm
+ - php-pear
+ - php-mbstring

@@ -1,0 +1,10 @@
+---
+- name: Installation de php
+  dnf:
+   name: "{{ packet_php }}"
+   state: present
+
+- name: restart nginx
+  systemd:
+   name: nginx
+   state: restarted

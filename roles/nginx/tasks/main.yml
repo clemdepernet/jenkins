@@ -1,0 +1,58 @@
+---
+  - name: Installation nginx
+    dnf:
+     name: nginx
+     state: present
+  - name: désactivation de Apache
+    systemd:
+     name: httpd
+     state: stopped
+     enabled: no
+  - name: Création rep /var/www/{{ item }}/html
+    file:
+     path: /var/www/{{ item }}/html
+     state: directory
+     mode: '0755'
+     owner: root
+     group: root
+     recurse: yes
+    loop:
+     "{{ sites }}"
+  - name: Création des fichiers index.html a partir de modèles
+    template:
+     src: index.j2
+     dest: /var/www/{{ item }}/html/index.html
+    loop:
+      "{{ sites }}"
+  - name: Création des rep sites web
+    file:
+     path: /etc/nginx/sites-{{ item }}
+     state: directory
+    loop:
+     - available
+     - enabled
+  - name: Modification de nginx.conf
+    lineinfile:
+     path: /etc/nginx/nginx.conf
+     insertbefore: '^# Settings'
+     line: '    include /etc/nginx/sites-enabled/*.conf;'
+
+  - name: Création du template de fichier de conf
+    template:
+     src: conf.j2
+     dest: /etc/nginx/sites-available/{{ item }}.conf
+    loop:
+     "{{ sites }}"
+  - name: Création d'un lien symbolique
+    file:
+     src: /etc/nginx/sites-available/{{ item }}.conf
+     dest: /etc/nginx/sites-enabled/{{ item }}.conf
+     state: link
+    loop:
+      "{{ sites }}"
+  - name:
+    systemd:
+     name: nginx
+     state: restarted
+     enabled: yes
+
