@@ -5,12 +5,12 @@
   tasks:
 - name: Installation MariaDB
   dnf: 
-   name: {{ item }}
+   name: mariadb
    state: present
-  loop:
-       - mariadb
-       - python3-PyMySQL  
-     
+- name: Installation Py3SQL
+  dnf: 
+   name: python3-PyMySQL
+   state: present
 - name: Activation Maria DB
   systemd:
    name: mariadb
