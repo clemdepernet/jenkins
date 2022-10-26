@@ -10,6 +10,7 @@
         - python3-PyMySQL  
       state: present
    - name: Activation Maria DB
+      systemd:
       name: mariadb
       state: started
       enabled: yes
