@@ -4,15 +4,15 @@
    MYSQL_ROOT_PASSWORD: 'root'
   tasks:
 - name: Installation MariaDB
-   dnf: 
-    name: {{ item }}
-    state: present
+  dnf: 
+   name: {{ item }}
+   state: present
   loop:
        - mariadb
        - python3-PyMySQL  
      
 - name: Activation Maria DB
-   systemd:
-    name: mariadb
-    state: started
-    enabled: yes
+  systemd:
+   name: mariadb
+   state: started
+   enabled: yes
