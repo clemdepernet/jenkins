@@ -11,9 +11,9 @@
       state: present
    - name: Activation Maria DB
       systemd:
-      name: mariadb
-      state: started
-      enabled: yes
+       name: mariadb
+       state: started
+       enabled: yes
 
 
 
