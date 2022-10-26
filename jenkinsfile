@@ -1,0 +1,7 @@
+ node{
+      stage('Clone') {
+          checkout scm
+      }
+      stage('Install Mariadb') {
+	sh "ansible-playbook -i inventaire jenkinsplaybook.yml"
+      }
