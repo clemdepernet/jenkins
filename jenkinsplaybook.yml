@@ -1,5 +1,5 @@
 ---
-- hosts: web
+- hosts: 10.0.0.160
   roles:
     - roles/nginx
     - roles/php
